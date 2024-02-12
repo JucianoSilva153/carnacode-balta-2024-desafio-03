@@ -13,8 +13,8 @@
                     <p>@FraseModal</p>
                 </div>
                 <div class="modalAction">
-                    <button >Registrar medidas</button>
-                    <button @onclick="Fechar">Fechar</button>
+                    <button @onclick="FecharModal">Sair</button>
+                
                 </div>
             </div>
         </div>
@@ -26,14 +26,16 @@
     public bool Mostrar { get; set; }
 
     [Parameter]
-    public string TituloModal { get; set; } = "Sobrepeso";
+    public string TituloModal { get; set; } = "Ops!";
 
     [Parameter]
-    public string FraseModal { get; set; } = "Cuidado você está com sobrepeso, dê uma atenção para sua saúde";
+    public string FraseModal { get; set; } = "";
 
-    void Fechar() =>Mostrar = false;
-   
 
-   
+    void FecharModal()
+    =>
+        Mostrar = false;
+    
+
 
 }
