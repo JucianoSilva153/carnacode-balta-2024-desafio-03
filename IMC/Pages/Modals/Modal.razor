@@ -1,0 +1,27 @@
+@if (Mostrar)
+{
+    <div class="backModal">
+        <div class=" modalContainer">
+            <div class="modalLogo">
+                <div class="logo">
+                    <img src="icon-no-bg.png" alt="">
+                </div>
+            </div>
+            <div class="modalContent">
+                <div class="modalHead">
+                    <h2>⛔ Sobrepeso</h2>
+                    <p>Cuidado você está com sobrepeso, dê uma atenção para sua saúde</p>
+                </div>
+                <div class="modalAction">
+                    <button>Registrar medidas</button>
+                    <button class="btnOutline">Ver meu Historico</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public bool Mostrar { get; set; }
+}
