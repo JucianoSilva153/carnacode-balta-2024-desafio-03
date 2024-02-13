@@ -1,4 +1,5 @@
 @inject IJSRuntime jsRuntime
+@inject NavigationManager rotas
 
 
 
@@ -46,6 +47,8 @@
         listaImcs.Add(IMC);
         var json = JsonSerializer.Serialize(listaImcs);
         await jsRuntime.InvokeVoidAsync("SalvarIMC", json);
+
+        rotas.NavigateTo("/historico");
 
     }
 
