@@ -59,7 +59,7 @@
     public string tituloModal { get; set; }
 
     protected override async Task OnInitializedAsync()
-   {
+    {
         await PegarListaIMC();
     }
     async void CalcularIMC()
@@ -171,7 +171,7 @@
 
     async Task GuardaImcNaLista()
     {
-
+        imc.DataDoCalculo = DateTime.Now;
         listaImcs.Add(imc);
         var json = JsonSerializer.Serialize(listaImcs);
         await jsRuntime.InvokeVoidAsync("SalvarIMC", json);

@@ -3,10 +3,8 @@
 namespace IMC.Models;
 
     public class CalculoIMC
-    {
-
-
-        public decimal Altura { get; set; }
+{
+    public decimal Altura { get; set; }
 
         public decimal Peso { get; set; }
 
@@ -17,5 +15,7 @@ namespace IMC.Models;
         public decimal ResultadoIMC { get; set; }
 
         public EnumClassicacaoIMC EnumClassicacaoIMC { get; set; }
-    }
+
+          public DateTime DataDoCalculo { get; set; }
+}
 
