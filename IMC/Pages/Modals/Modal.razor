@@ -1,25 +1,26 @@
-@if (Mostrar)
-{
-    <div class="backModal" style="">
-        <div class=" modalContainer">
-            <div class="modalLogo">
-                <div class="logo">
-                    <img src="icon-no-bg.png" alt="">
-                </div>
+@inject IJSRuntime jsRuntime
+
+
+
+<div class="backModal" id="Modal" style="">
+    <div class=" modalContainer">
+        <div class="modalLogo">
+            <div class="logo">
+                <img src="icon-no-bg.png" alt="">
             </div>
-            <div class="modalContent">
-                <div class="modalHead">
-                    <h2>⛔ @TituloModal</h2>
-                    <p>@FraseModal</p>
-                </div>
-                <div class="modalAction">
-                    <button >Registrar medidas</button>
-                    <button @onclick="Fechar">Fechar</button>
-                </div>
+        </div>
+        <div class="modalContent">
+            <div class="modalHead">
+                <h2>@TituloModal</h2>
+                <p>@FraseModal</p>
+            </div>
+            <div class="modalAction">
+                <button>Registrar medidas</button>
+                <button class="btnOutline" @onclick="Fechar">Fechar</button>
             </div>
         </div>
     </div>
-}
+</div>
 
 @code {
     [Parameter]
@@ -31,9 +32,12 @@
     [Parameter]
     public string FraseModal { get; set; } = "Cuidado você está com sobrepeso, dê uma atenção para sua saúde";
 
-    void Fechar() =>Mostrar = false;
-   
+    async void Fechar()
+    {
+        await jsRuntime.InvokeVoidAsync("OcultarModel");
+    }
 
-   
+
+
 
 }
