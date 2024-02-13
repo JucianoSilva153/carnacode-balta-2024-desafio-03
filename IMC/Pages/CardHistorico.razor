@@ -1,7 +1,9 @@
 
 <div class="card">
     <div class="cardLogo">
-        <div class="logo"></div>
+        <div class="logo">
+            <img src="@RetornaArquivoSexo()" class="cardHsitorico-img" alt="">
+        </div>
     </div>
     <div class="cardContent">
         <div class="cardHead">
@@ -20,6 +22,10 @@
 
     [Parameter]
     public EnumClassicacaoIMC EnumClassicacaoIMCCard { get; set; }
+
+    [Parameter]
+    public string TipoSexo { get; set; } = "masculino";
+
 
     string RetornaCondicao()
     {
@@ -77,6 +83,17 @@
         {
             return $"{(int)diff.TotalHours}h atrás";
         }
+    }
+
+    string RetornaArquivoSexo()
+    {
+        if (TipoSexo == "masculino")
+        
+            return "masc.png";
+        else
+        
+            return "fem.png";
+        
     }
 
 
