@@ -36,11 +36,6 @@
         </div>
  
 </div>
-
-@* 1- Tem duas Modals, poderia ser usada a mesma Modal para se passar as mensagens, 
-o que mudaria é o conteudo *@
-
-@* 2 - Os valores não estavam sendo passados pois cê não acessou a varial usando arroba (@) *@
 <Modal 
        FraseModal=@fraseModal
        TituloModal=@tituloModal
@@ -49,9 +44,6 @@ o que mudaria é o conteudo *@
 </Modal>
 
 
-@* <Modal Mostrar=mostrarAlertaModal
-       FraseModal="fraseAlerta"
-       TituloModal="tituloAlerta"></Modal> *@
 @code {
     private string chave = "imcs";
     CalculoIMC imc = new CalculoIMC();
@@ -66,6 +58,7 @@ o que mudaria é o conteudo *@
     {
         await PegarListaIMC();
     }
+
     async void CalcularIMC()
     {
         if (imc.Altura > 0 && imc.Peso > 0)
@@ -73,7 +66,7 @@ o que mudaria é o conteudo *@
             CalculaIMc();
             InsereClassificaoImc();
             await jsRuntime.InvokeVoidAsync("MostrarModal");
-            await GuardaImcNaLista();
+          
         }
         else
         {
@@ -97,38 +90,38 @@ o que mudaria é o conteudo *@
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.AbaixoDoPeso;
                 fraseModal = "Você é mais forte do que pensa. Lembre-se de cuidar bem do seu corpo para alcançar seu melhor estado de saúde";
-                tituloModal = "✅ Você esta abaixo do peso ";
+                tituloModal = $"✅ IMC:{imc.ResultadoIMC:F2} - Você esta abaixo do peso ";
 
             }
             else if (imc.ResultadoIMC >= 22 && imc.ResultadoIMC < 27)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.PesoNormal;
                 fraseModal = "Parabéns! Seu esforço em manter um peso saudável está dando resultados. Continue se alimentando bem e se exercitando regularmente";
-                tituloModal = "✅ Você esta com peso normal ";
+                tituloModal = $"✅ IMC:{imc.ResultadoIMC:F2} - Você esta com peso normal ";
             }
             else if (imc.ResultadoIMC >= 27 && imc.ResultadoIMC < 30)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.SobrePeso;
                 fraseModal = "Você é capaz de alcançar seus objetivos de saúde. Pequenas mudanças podem fazer uma grande diferença. Estou aqui para apoiá-lo.";
-                tituloModal = "⛔ Você esta com Sobrepeso ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Sobrepeso ";
             }
             else if (imc.ResultadoIMC >= 30 && imc.ResultadoIMC < 35)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.Obesidade1;
                 fraseModal = "Você não está sozinho nessa jornada. Com determinação e apoio, você pode superar esse desafio. Estou aqui para ajudar";
-                tituloModal = "⛔ Você esta com Obesidade classe I ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Obesidade classe I ";
             }
             else if (imc.ResultadoIMC >= 35 && imc.ResultadoIMC < 40)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.Obesidade2;
                 fraseModal = "Você está no caminho certo para alcançar uma saúde melhor. Cada pequena vitória importa. Mantenha-se firme em seu compromisso consigo mesmo";
-                tituloModal = "⛔ Você esta com Obesidade classe II ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Obesidade classe II ";
             }
             else if (imc.ResultadoIMC >= 40)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.Obesidade3;
                 fraseModal = "Você tem a força e a determinação para transformar sua saúde. Peça ajuda quando precisar e lembre-se de que cada passo conta";
-                tituloModal = "⛔ Você esta com Obesidade classe III ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Obesidade classe III ";
             }
         }
         else
@@ -137,48 +130,49 @@ o que mudaria é o conteudo *@
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.AbaixoDoPeso;
                 fraseModal = "Você é mais forte do que pensa. Lembre-se de cuidar bem do seu corpo para alcançar seu melhor estado de saúde";
-                tituloModal = "✅ Você esta abaixo do peso ";
+                tituloModal = $"✅  IMC:{imc.ResultadoIMC:F2} - Você esta abaixo do peso ";
             }
             else if (imc.ResultadoIMC >= 18 && imc.ResultadoIMC < 25)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.PesoNormal;
                 fraseModal = "Parabéns! Seu esforço em manter um peso saudável está dando resultados. Continue se alimentando bem e se exercitando regularmente";
-                tituloModal = "✅ Você esta com peso normal ";
+                tituloModal = $"✅ IMC:{imc.ResultadoIMC:F2} - Você esta com peso normal ";
             }
             else if (imc.ResultadoIMC >= 25 && imc.ResultadoIMC < 29)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.SobrePeso;
                 fraseModal = "Você é capaz de alcançar seus objetivos de saúde. Pequenas mudanças podem fazer uma grande diferença. Estou aqui para apoiá-lo.";
-                tituloModal = "⛔ Você esta com Sobrepeso ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Sobrepeso ";
             }
             else if (imc.ResultadoIMC >= 29 && imc.ResultadoIMC < 34)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.Obesidade1;
                 fraseModal = "Você não está sozinho nessa jornada. Com determinação e apoio, você pode superar esse desafio. Estou aqui para ajudar";
-                tituloModal = "⛔ Você esta com Obesidade classe I ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Obesidade classe I ";
             }
             else if (imc.ResultadoIMC >= 34 && imc.ResultadoIMC < 39)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.Obesidade2;
                 fraseModal = "Você está no caminho certo para alcançar uma saúde melhor. Cada pequena vitória importa. Mantenha-se firme em seu compromisso consigo mesmo";
-                tituloModal = "⛔ Você esta com Obesidade classe II ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Obesidade classe II ";
             }
             else if (imc.ResultadoIMC >= 39)
             {
                 imc.EnumClassicacaoIMC = EnumClassicacaoIMC.Obesidade3;
                 fraseModal = "Você tem a força e a determinação para transformar sua saúde. Peça ajuda quando precisar e lembre-se de que cada passo conta";
-                tituloModal = "⛔ Você esta com Obesidade classe III ";
+                tituloModal = $"⛔ IMC:{imc.ResultadoIMC:F2} - Você esta com Obesidade classe III ";
             }
         }
     }
 
     async Task GuardaImcNaLista()
     {
-
+        imc.DataDoCalculo = DateTime.Now;
         listaImcs.Add(imc);
         var json = JsonSerializer.Serialize(listaImcs);
         await jsRuntime.InvokeVoidAsync("SalvarIMC", json);
     }
+    
     private async Task PegarListaIMC()
     {
         string json = await jsRuntime.InvokeAsync<string>("PegaListaImc");
