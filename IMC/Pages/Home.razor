@@ -64,6 +64,7 @@ o que mudaria é o conteudo *@
 
     protected override async Task OnInitializedAsync()
     {
+        await PegarListaIMC();
     }
     async void CalcularIMC()
     {
@@ -72,6 +73,7 @@ o que mudaria é o conteudo *@
             CalculaIMc();
             InsereClassificaoImc();
             await jsRuntime.InvokeVoidAsync("MostrarModal");
+            await GuardaImcNaLista();
         }
         else
         {
@@ -169,6 +171,28 @@ o que mudaria é o conteudo *@
             }
         }
     }
+
+    async Task GuardaImcNaLista()
+    {
+
+        listaImcs.Add(imc);
+        var json = JsonSerializer.Serialize(listaImcs);
+        await jsRuntime.InvokeVoidAsync("SalvarIMC", json);
+    }
+    private async Task PegarListaIMC()
+    {
+        string json = await jsRuntime.InvokeAsync<string>("PegaListaImc");
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            listaImcs = JsonSerializer.Deserialize<List<CalculoIMC>>(json);
+        }
+        else
+        {
+            listaImcs = new List<CalculoIMC>();
+        }
+    }
+
 
 
 

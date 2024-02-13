@@ -73,15 +73,15 @@
 
         if (diff.TotalSeconds < 60)
         {
-            return $"{(int)diff.TotalSeconds}s atrás";
+            return $"{diff.TotalSeconds:F2}s atrás";
         }
         else if (diff.TotalMinutes < 60)
         {
-            return $"{(int)diff.TotalMinutes}m atrás";
+            return $"{diff.TotalMinutes:F2}m atrás";
         }
         else
         {
-            return $"{(int)diff.TotalHours}h atrás";
+            return $"{diff.TotalHours:F2}h atrás";
         }
     }
 
