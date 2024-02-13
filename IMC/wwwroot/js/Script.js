@@ -2,7 +2,7 @@ window.SalvarIMC = (lista) => {
     localStorage.setItem("imcs", lista);
 };
 
-window.PegaLsitaImc = () => {
+window.PegaListaImc = () => {
     console.log(localStorage.getItem("imcs"));
     return localStorage.getItem("imcs");
 };
