@@ -41,9 +41,12 @@
 o que mudaria é o conteudo *@
 
 @* 2 - Os valores não estavam sendo passados pois cê não acessou a varial usando arroba (@) *@
-<Modal Mostrar=@mostrarModal
+<Modal 
        FraseModal=@fraseModal
-       TituloModal=@tituloModal></Modal>
+       TituloModal=@tituloModal
+       IMC="@imc"
+       listaImcs="@listaImcs">
+</Modal>
 
 
 @* <Modal Mostrar=mostrarAlertaModal
@@ -61,7 +64,6 @@ o que mudaria é o conteudo *@
 
     protected override async Task OnInitializedAsync()
     {
-        await PegarListaIMC();
     }
     async void CalcularIMC()
     {
@@ -70,8 +72,6 @@ o que mudaria é o conteudo *@
             CalculaIMc();
             InsereClassificaoImc();
             await jsRuntime.InvokeVoidAsync("MostrarModal");
-            await GuardaImcNaLista();
-
         }
         else
         {
@@ -167,36 +167,6 @@ o que mudaria é o conteudo *@
                 fraseModal = "Você tem a força e a determinação para transformar sua saúde. Peça ajuda quando precisar e lembre-se de que cada passo conta";
                 tituloModal = "⛔ Você esta com Obesidade classe III ";
             }
-        }
-    }
-
-
-    async Task GuardaImcNaLista()
-    {
-        imc.DataDoCalculo = DateTime.Now;
-        listaImcs.Add(imc);
-        var json = JsonSerializer.Serialize(listaImcs);
-        await jsRuntime.InvokeVoidAsync("SalvarIMC", json);
-
-        mostrarModal = true;
-        await Task.Delay(10000);
-        mostrarModal = false;
-
-    }
-
-
-
-    private async Task PegarListaIMC()
-    {
-        string json = await jsRuntime.InvokeAsync<string>("PegaListaImc");
-
-        if (!string.IsNullOrEmpty(json))
-        {
-            listaImcs =  JsonSerializer.Deserialize<List<CalculoIMC>>(json);
-        }
-        else
-        {
-            listaImcs = new List<CalculoIMC>();
         }
     }
 
