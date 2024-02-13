@@ -36,7 +36,7 @@
 
     private async Task PegarListaIMC()
     {
-        string json = await jsRuntime.InvokeAsync<string>("PegaLsitaImc");
+        string json = await jsRuntime.InvokeAsync<string>("PegaListaImc");
 
         if (!string.IsNullOrEmpty(json))
         {
