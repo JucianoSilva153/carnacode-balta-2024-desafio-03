@@ -1,0 +1,84 @@
+
+<div class="card">
+    <div class="cardLogo">
+        <div class="logo"></div>
+    </div>
+    <div class="cardContent">
+        <div class="cardHead">
+            <div class="title">@RetornaCondicao() </div>
+            <div class="time">@CalcularDiferenca()</div>
+        </div>
+        <div class="text">
+            <p>@RetornaFraseMotivacional()</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public DateTime DataCalculoCard { get; set; }
+
+    [Parameter]
+    public EnumClassicacaoIMC EnumClassicacaoIMCCard { get; set; }
+
+    string RetornaCondicao()
+    {
+        switch (EnumClassicacaoIMCCard)
+        {
+            case EnumClassicacaoIMC.AbaixoDoPeso:
+                return "Abaixo do peso ⛔";
+            case EnumClassicacaoIMC.PesoNormal:
+                return "Peso normal ✅";
+            case EnumClassicacaoIMC.SobrePeso:
+                return "Sobre peso ⛔";
+            case EnumClassicacaoIMC.Obesidade1:
+                return "Obesidade I ⛔";
+            case EnumClassicacaoIMC.Obesidade2:
+                return "Obesidade II ⛔";
+            case EnumClassicacaoIMC.Obesidade3:
+                return "Obesidade III ⛔";
+            default:
+                return "";
+        }
+    }
+    string RetornaFraseMotivacional()
+    {
+        switch (EnumClassicacaoIMCCard)
+        {
+            case EnumClassicacaoIMC.AbaixoDoPeso:
+                return "Você é mais forte do que pensa. Lembre-se de cuidar bem do seu corpo para alcançar seu melhor estado de saúde";
+            case EnumClassicacaoIMC.PesoNormal:
+                return "Parabéns! Seu esforço em manter um peso saudável está dando resultados. Continue se alimentando bem e se exercitando regularmente ";
+            case EnumClassicacaoIMC.SobrePeso:
+                return "Você é capaz de alcançar seus objetivos de saúde. Pequenas mudanças podem fazer uma grande diferença. Estou aqui para apoiá-lo.";
+            case EnumClassicacaoIMC.Obesidade1:
+                return "Você não está sozinho nessa jornada. Com determinação e apoio, você pode superar esse desafio. Estou aqui para ajudar";
+            case EnumClassicacaoIMC.Obesidade2:
+                return "Você está no caminho certo para alcançar uma saúde melhor. Cada pequena vitória importa. Mantenha-se firme em seu compromisso consigo mesmo";
+            case EnumClassicacaoIMC.Obesidade3:
+                return "Você tem a força e a determinação para transformar sua saúde. Peça ajuda quando precisar e lembre-se de que cada passo conta";
+            default:
+                return "";
+        }
+    }
+    string CalcularDiferenca()
+    {
+        TimeSpan diff = DateTime.Now - DataCalculoCard;
+
+        if (diff.TotalSeconds < 60)
+        {
+            return $"{(int)diff.TotalSeconds}s atrás";
+        }
+        else if (diff.TotalMinutes < 60)
+        {
+            return $"{(int)diff.TotalMinutes}m atrás";
+        }
+        else
+        {
+            return $"{(int)diff.TotalHours}h atrás";
+        }
+    }
+
+
+
+}
