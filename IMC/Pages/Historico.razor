@@ -1,0 +1,53 @@
+@page "/historico"
+@inject IJSRuntime jsRuntime
+
+<div class="head">
+    <div class="logo">
+        <img src="icon-no-bg.png" alt="">
+    </div>
+    <h2>Historico</h2>
+</div>
+<div class="history">
+    <div class="container">
+        <input type="text" placeholder="Pesquisar...">
+        @if (iMCs != null)
+        {
+            @foreach (var item in iMCs)
+            {
+                <CardHistorico DataCalculoCard=item.DataDoCalculo EnumClassicacaoIMCCard=item.EnumClassicacaoIMC>
+                </CardHistorico>
+            }
+        }
+
+
+    </div>
+</div>
+
+@code {
+    List<CalculoIMC> iMCs = new List<CalculoIMC>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await PegarListaIMC();
+    }
+
+
+    private async Task PegarListaIMC()
+    {
+        string json = await jsRuntime.InvokeAsync<string>("PegaListaImc");
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            iMCs = JsonSerializer.Deserialize<List<CalculoIMC>>(json);
+        }
+        else
+        {
+            iMCs = new List<CalculoIMC>();
+        }
+    }
+
+
+
+
+
+}

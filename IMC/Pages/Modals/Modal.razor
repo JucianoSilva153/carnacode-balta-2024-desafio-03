@@ -1,0 +1,58 @@
+@inject IJSRuntime jsRuntime
+@inject NavigationManager rotas
+
+
+
+<div class="backModal" id="Modal" style="">
+    <div class=" modalContainer">
+        <div class="modalLogo">
+            <div class="logo">
+                <img src="icon-no-bg.png" alt="">
+            </div>
+        </div>
+        <div class="modalContent">
+            <div class="modalHead">
+                <h2>@TituloModal</h2>
+                <p>@FraseModal</p>
+            </div>
+            <div class="modalAction">
+                <button @onclick="GuardaImcNaLista" >Registrar medidas</button>
+                <button class="btnOutline" @onclick="Fechar">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string TituloModal { get; set; } = "Sobrepeso";
+
+    [Parameter]
+    public string FraseModal { get; set; } = "Cuidado você está com sobrepeso, dê uma atenção para sua saúde";
+
+    [Parameter]
+    public CalculoIMC IMC { get; set; }
+    [Parameter]
+    public List<CalculoIMC> listaImcs { get; set; }
+
+    async void Fechar()
+    {
+        await jsRuntime.InvokeVoidAsync("OcultarModel");
+    }
+
+    async Task GuardaImcNaLista()
+    {
+        IMC.DataDoCalculo = DateTime.Now;
+        listaImcs.Add(IMC);
+        var json = JsonSerializer.Serialize(listaImcs);
+        await jsRuntime.InvokeVoidAsync("SalvarIMC", json);
+
+        rotas.NavigateTo("/historico");
+
+    }
+
+
+
+
+}

@@ -1,0 +1,41 @@
+@if (Mostrar)
+{
+    <div class="backModal" style="">
+        <div class=" modalContainer">
+            <div class="modalLogo">
+                <div class="logo">
+                    <img src="icon-no-bg.png" alt="">
+                </div>
+            </div>
+            <div class="modalContent">
+                <div class="modalHead">
+                    <h2>⛔ @TituloModal</h2>
+                    <p>@FraseModal</p>
+                </div>
+                <div class="modalAction">
+                    <button @onclick="FecharModal">Sair</button>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public bool Mostrar { get; set; }
+
+    [Parameter]
+    public string TituloModal { get; set; } = "Ops!";
+
+    [Parameter]
+    public string FraseModal { get; set; } = "";
+
+
+    void FecharModal()
+    =>
+        Mostrar = false;
+    
+
+
+}
