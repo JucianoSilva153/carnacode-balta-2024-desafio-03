@@ -2,7 +2,7 @@
 <div class="card">
     <div class="cardLogo">
         <div class="logo">
-            <img src="@RetornaArquivoSexo()" class="cardHsitorico-img" alt="">
+          
         </div>
     </div>
     <div class="cardContent">
@@ -23,8 +23,8 @@
     [Parameter]
     public EnumClassicacaoIMC EnumClassicacaoIMCCard { get; set; }
 
-    [Parameter]
-    public string TipoSexo { get; set; } = "masculino";
+    //[Parameter]
+    //public string TipoSexo { get; set; } = "masculino";
 
 
     string RetornaCondicao()
@@ -85,16 +85,7 @@
         }
     }
 
-    string RetornaArquivoSexo()
-    {
-        if (TipoSexo == "masculino")
-        
-            return "masc.png";
-        else
-        
-            return "fem.png";
-        
-    }
+   
 
 
 
